@@ -17,3 +17,13 @@ end
 get '/contacts' do
   erb :contacts
 end
+
+post '/visit' do
+  @user_name = params[:user]
+  @phone = params[:phone]
+  @datetime = params[:datetime]
+  of = File.open 'customers.txt', 'a'
+  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime} \n"
+  of.close
+  erb 'Спасибо что пользуетесь нашими услугами!'
+end
