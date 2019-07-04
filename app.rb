@@ -23,8 +23,9 @@ post '/visit' do
   @phone = params[:phone]
   @datetime = params[:datetime]
   @barber = params[:barber]
+  @color = params[:color]
   of = File.open 'customers.txt', 'a'
-  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber} \n"
+  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
   of.close
   erb 'Спасибо что пользуетесь нашими услугами!'
 end
