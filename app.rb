@@ -19,11 +19,20 @@ get '/contacts' do
 end
 
 post '/visit' do
-  @user_name = params[:user]
+  @user_name = params[:username]
   @phone = params[:phone]
   @datetime = params[:datetime]
+  @barber = params[:barber]
   of = File.open 'customers.txt', 'a'
-  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime} \n"
+  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber} \n"
   of.close
   erb 'Спасибо что пользуетесь нашими услугами!'
+end
+
+post '/about' do
+  @feedback = params[:feedback]
+  of = File.open 'feebacks.txt', 'a'
+  of.write "#{@feedback} \n"
+  of.close
+  erb 'Спасибо за ваш отзыв!'
 end

@@ -2,7 +2,13 @@
 <p>На этой странице вы сможете записаться к нам в Barber Shop</p>
 
 <form action="/visit" method="POST" role="form">
-
+  <select size="1" class="form-control" name="barber">
+    <option disabled>Выберите Брадобрея</option>
+    <option value="Никодим">Никодим</option>
+    <option selected value="Ефросий">Ефросий</option>
+    <option value="Никифор">Никифор</option>
+    <option value="Аганес">Аганес</option>
+  </select>
   <div class="form-group">
     <label>Ваше имя</label>
     <input name="username" type="text" class="form-control" placeholder="Ваше имя">
@@ -18,6 +24,6 @@
     <input name="datetime" type="datetime-local" class="form-control" placeholder="Введите дату и время">
   </div>
 
-  <button type="submit" class="btn btn-primary">Записаться</button>
+  <button type="submit" class="btn btn-danger">Записаться</button>
 
 </form>
