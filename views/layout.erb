@@ -54,9 +54,7 @@
 
 			<div>
 				<%if @error then %>
-						<div class="alert alert-error"><%=@error%></div>
-				<%elsif @pass_error then %>
-						<div class="alert alert-error"><%=@pass_error%></div>
+						<div class="alert alert-danger"><%=@error%></div>
 				<% end %>
 				<%= yield %>
 			</div>

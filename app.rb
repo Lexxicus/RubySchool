@@ -57,7 +57,7 @@ post '/login/attempt' do
     where_user_came_from = session[:previous_url] || '/'
     redirect to where_user_came_from
   else
-    @pass_error = 'Sorry, you enter wrong login or password, try again '
+    @error = 'Sorry, you enter wrong login or password, try again '
     halt erb(:login_form)
   end
 end
