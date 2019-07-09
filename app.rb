@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -8,7 +10,7 @@ end
 
 helpers do
   def username
-    session[:identity] ? session[:identity] : 'Hello stranger'
+    session[:identity] || 'Hello stranger'
   end
 end
 
@@ -21,11 +23,11 @@ before '/visit/' do
 end
 
 get '/' do
-	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
+  erb 'Hello! <a href="https://github.com/bootstrap-ruby/sinatra-bootstrap">Original</a> pattern has been modified for <a href="http://rubyschool.us/">Ruby School</a>'
 end
 
 get '/about' do
-	erb :about
+  erb :about
 end
 
 get '/contacts' do
@@ -43,11 +45,11 @@ get '/logout' do
 end
 
 get '/visit' do
-  unless session[:identity]
-    session[:previous_url] = request.path
-    @error = 'Sorry, you need to be logged in to visit ' + request.path
-    halt erb(:login_form)
-  end
+  # unless session[:identity]
+  # session[:previous_url] = request.path
+  # @error = 'Sorry, you need to be logged in to visit ' + request.path
+  # halt erb(:login_form)
+  # end
   erb :visit
 end
 
@@ -63,26 +65,27 @@ post '/login/attempt' do
 end
 
 post '/visit' do
-  @user_name = params[:username]
+  @user_name = params[:name]
   @phone = params[:phone]
   @datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
-  if @user_name == ''
-    @error == 'Введите имя'
-  end
 
-  if @user_name == ''
-    @error == 'Введите имя'
-  end
-  
+  hh = {
+      :name => 'Введите имя',
+      :phone => 'Введите телефон',
+      :datetime => 'Выберите дату',
+      :barber => 'Выберите Парикмахера'
+  }
+
+  @error = hh.select {|key,_| params[key] == ''}.values.join(',')
+
   if @error != ''
     return erb :visit
   end
-  of = File.open 'customers.txt', 'a'
-  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
-  of.close
-  erb 'Спасибо что пользуетесь нашими услугами!'
+
+  erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+  
 end
 
 post '/about' do
