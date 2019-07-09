@@ -68,6 +68,17 @@ post '/visit' do
   @datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
+  if @user_name == ''
+    @error == 'Введите имя'
+  end
+
+  if @user_name == ''
+    @error == 'Введите имя'
+  end
+  
+  if @error != ''
+    return erb :visit
+  end
   of = File.open 'customers.txt', 'a'
   of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
   of.close

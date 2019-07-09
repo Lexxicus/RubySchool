@@ -8,3 +8,4 @@ Customer: , Phone: йцейцейейцейц, Date: 2019-07-13T11:11
 Customer: admin, Phone: 8 912 837-07-32, Date: 2019-07-03T12:12, Master: Ефросий 
 Customer: admin, Phone: 8 912 837-07-32, Date: 2019-07-05T05:55, Master: Никодим, Color: #dc2127 
 Customer: admin, Phone: 8 912 837-07-32, Date: 2019-07-05T05:55, Master: Никодим, Color: #dc2127 
+Customer: , Phone: 8 912 837-07-32, Date: , Master: Ефросий, Color: #7bd148 
