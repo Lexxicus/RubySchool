@@ -100,7 +100,10 @@ post '/visit' do
     subject: 'Новый клиент',
     body: "Username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
   )
-  erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+  of = File.open 'customers.txt', 'a'
+  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
+  of.close
+  erb 'Спасибо что пользуетесь нашими услугами!'
 end
 
 post '/about' do
