@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'pony'
 
 configure do
   enable :sessions
@@ -72,20 +73,34 @@ post '/visit' do
   @color = params[:color]
 
   hh = {
-      :name => 'Введите имя',
-      :phone => 'Введите телефон',
-      :datetime => 'Выберите дату',
-      :barber => 'Выберите Парикмахера'
+    name: 'Введите имя',
+    phone: 'Введите телефон',
+    datetime: 'Выберите дату',
+    barber: 'Выберите Парикмахера'
   }
 
-  @error = hh.select {|key,_| params[key] == ''}.values.join(',')
+  @error = hh.select { |key, _| params[key] == '' }.values.join(',')
 
-  if @error != ''
-    return erb :visit
-  end
+  return erb :visit if @error != ''
 
   erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
-  
+
+  Pony.mail(
+    to: 'lexx-03@mail.ru',
+    via: :smtp,
+    via_options: {
+      address: 'smtp.gmail.com',
+      port: '587',
+      enable_starttls_auto: true,
+      user_name: 'alexxxicus@gmail.com',
+      password: 'baqtpdgclrcuxvly',
+      authentication: :plain, # :plain, :login, :cram_md5, no auth by default
+      domain: 'gmail.com' # the HELO domain provided by the client to the server
+    },
+    subject: 'Новый клиент',
+    body: "Username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+  )
+  erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
 post '/about' do
