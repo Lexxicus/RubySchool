@@ -14,3 +14,6 @@ Customer: admin, Phone: 8 912 837-07-32, Date: 2019-07-09T13:00, Master: Ефр�
 Customer: , Phone: , Date: , Master: Ефросий, Color: #7bd148 
 Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-11T12:00, Master: Ефросий, Color: #5484ed 
 Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-11T12:00, Master: Ефросий, Color: #5484ed 
+Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-11T15:00, Master: Никодим, Color: #5484ed 
+Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-11T15:00, Master: Никодим, Color: #5484ed 
+Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-17T15:00, Master: none, Color: #51b749 

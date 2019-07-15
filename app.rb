@@ -4,6 +4,7 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pony'
+require 'sqlite3'
 
 configure do
   enable :sessions
@@ -83,8 +84,6 @@ post '/visit' do
 
   return erb :visit if @error != ''
 
-  erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
-
   Pony.mail(
     to: 'lexx-03@mail.ru',
     via: :smtp,
@@ -98,18 +97,27 @@ post '/visit' do
       domain: 'gmail.com' # the HELO domain provided by the client to the server
     },
     subject: 'Новый клиент',
-    body: "Username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+    body: "Username is #{@user_name}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
   )
   of = File.open 'customers.txt', 'a'
   of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
   of.close
+  db = SQLite3::Database.new 'test.sqlite'
+  db.execute "INSERT INTO Users (Name, Phone, Datestamp, Barber, Color)
+  VALUES ('#{@user_name}', '#{@phone}', '#{@datetime}', '#{@barber}', '#{@color}')"
+  db.close
   erb 'Спасибо что пользуетесь нашими услугами!'
 end
 
 post '/about' do
+  @email = params[:email]
   @feedback = params[:feedback]
   of = File.open 'feebacks.txt', 'a'
-  of.write "#{@feedback} \n"
+  of.write "#{@email}, #{@feedback} \n"
   of.close
+  db = SQLite3::Database.new 'test.sqlite'
+  db.execute "INSERT INTO Contacts (Email, Message)
+  VALUES ('#{@email}', '#{@feedback}')"
+  db.close
   erb 'Спасибо за ваш отзыв!'
 end
