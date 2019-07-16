@@ -26,4 +26,11 @@ Customer: admin, Phone: 890800000, Date: 2019-07-08T15:04, Master: Ефроси�
 Customer: admin, Phone: 890800000, Date: 121112-12-12T12:12, Master: Никодим, Color: #7bd148 
 Customer: admin, Phone: 890800000, Date: 16.07.2019 15:00, Master: Никодим, Color: #7bd148 
 Customer: Иван, Phone: 890800000, Date: 18.07.2019 17:00, Master: Никодим, Color: #7bd148 
-Customer: Иван, Phone: 890800000, Date: 15.07.2019 16:00, Master: Никодим, Color: #7bd148 
+Customer: Иван, Phone: 890800000, Date: 15.07.2019 16:00, Master: Никодим, Color: #7bd148
+
+ <option <%= @barber == 'Никодим' ? 'selected' : '' %>>Никодим</option>
+    <option <%= @barber == 'Ефросий' ? 'selected' : '' %>>Ефросий</option>
+    <option <%= @barber == 'Никифор' ? 'selected' : '' %>>Никифор</option>
+    <option <%= @barber == 'Аганес' ? 'selected' : '' %>>Аганес</option>
+Customer: Иван, Phone: 890800000, Date: 30.07.2019 21:00, Master: Никодим, Color: #7bd148 
+Customer: admin, Phone: 890800000, Date: 24.07.2019 21:00, Master: Епифан, Color: #7bd148 

@@ -1,0 +1,24 @@
+<h2>Журнал записи на стрижку</h2>
+<p>Вот кто записался</p>
+
+<table class="table table-condensed" width="50%" border="1" cellpadding="4">
+  <tr class="active">
+    <th>Имя</th>
+    <th>Телефон</th>
+    <th>Брадобрей</th>
+    <th>Дата</th>
+  </tr>
+
+  <% @result.each do |row| %>
+
+      <tr>
+        <td><%= row['Name'] %></td>
+        <td><%= row['Phone'] %></td>
+        <td><%= row['Barber'] %></td>
+        <td><%= row['Datestamp'] %></td>
+      </tr>
+
+  <% end %>
+
+</table>
+

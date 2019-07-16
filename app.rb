@@ -69,6 +69,9 @@ get '/visit' do
   # @error = 'Sorry, you need to be logged in to visit ' + request.path
   # halt erb(:login_form)
   # end
+  db = get_db
+  @barbers = db.execute 'SELECT * FROM Barbers'
+  db.close
   erb :visit
 end
 
@@ -148,6 +151,9 @@ post '/about' do
 end
 
 get '/showusers' do
-  erb
+  db = get_db
+  @result = db.execute 'select * from Users order by Id desc'
+  db.close
+  erb :showusers
 end
 
