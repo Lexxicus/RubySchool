@@ -7,6 +7,20 @@ require 'pony'
 require 'sqlite3'
 
 configure do
+  @db = SQLite3::Database.new 'barbershop.db'
+  @db.execute 'CREATE TABLE IF NOT EXISTS
+    "Users"
+    (
+      "Id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "Name" VARCHAR,
+      "Phone" VARCHAR,
+      "Datestamp" VARCHAR,
+      "Barber" VARCHAR,
+      "Color" VARCHAR
+    )'
+end
+
+configure do
   enable :sessions
 end
 
