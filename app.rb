@@ -28,7 +28,9 @@ helpers do
 end
 
 def get_db
-  return SQLite3::Database.new 'barbershop.db'
+  db = SQLite3::Database.new 'barbershop.db'
+  db.results_as_hash = true
+  return db
 end
 
 before '/visit/' do
@@ -98,7 +100,6 @@ post '/visit' do
   @error = hh.select { |key, _| params[key] == '' }.values.join(',')
 
   return erb :visit if @error != ''
-  =begin
   Pony.mail(
     to: 'lexx-03@mail.ru',
     via: :smtp,
@@ -114,7 +115,6 @@ post '/visit' do
     subject: 'Новый клиент',
     body: "Username is #{@user_name}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
   )
-  =end
   of = File.open 'customers.txt', 'a'
   of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
   of.close
@@ -146,3 +146,8 @@ post '/about' do
   db.close
   erb 'Спасибо за ваш отзыв!'
 end
+
+get '/showusers' do
+  erb
+end
+
