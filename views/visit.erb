@@ -9,11 +9,11 @@
 
 <form action="/visit" method="POST" role="form">
   <select size="1" class="form-control" value="<%= @barber %>" name="barber">
-    <option value = "none" selected>Выберите Брадобрея</option>
-    <option value="Никодим">Никодим</option>
-    <option value="Ефросий">Ефросий</option>
-    <option value="Никифор">Никифор</option>
-    <option value="Аганес">Аганес</option>
+    <option value="" selected>Выберите Брадобрея</option>
+    <option <%= @barber == 'Никодим' ? 'selected' : '' %>>Никодим</option>
+    <option <%= @barber == 'Ефросий' ? 'selected' : '' %>>Ефросий</option>
+    <option <%= @barber == 'Никифор' ? 'selected' : '' %>>Никифор</option>
+    <option <%= @barber == 'Аганес' ? 'selected' : '' %>>Аганес</option>
   </select>
   <div class="form-group">
     <label>Ваше имя</label>
