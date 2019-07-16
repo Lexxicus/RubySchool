@@ -7,8 +7,9 @@ require 'pony'
 require 'sqlite3'
 
 configure do
-  @db = SQLite3::Database.new 'barbershop.db'
-  @db.execute 'CREATE TABLE IF NOT EXISTS
+  enable :sessions
+  db = SQLite3::Database.new 'barbershop.db'
+  db.execute 'CREATE TABLE IF NOT EXISTS
     "Users"
     (
       "Id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,14 +21,14 @@ configure do
     )'
 end
 
-configure do
-  enable :sessions
-end
-
 helpers do
   def username
     session[:identity] || 'Hello stranger'
   end
+end
+
+def get_db
+  return SQLite3::Database.new 'barbershop.db'
 end
 
 before '/visit/' do
@@ -97,7 +98,7 @@ post '/visit' do
   @error = hh.select { |key, _| params[key] == '' }.values.join(',')
 
   return erb :visit if @error != ''
-
+  =begin
   Pony.mail(
     to: 'lexx-03@mail.ru',
     via: :smtp,
@@ -113,12 +114,22 @@ post '/visit' do
     subject: 'Новый клиент',
     body: "Username is #{@user_name}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
   )
+  =end
   of = File.open 'customers.txt', 'a'
   of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
   of.close
-  db = SQLite3::Database.new 'test.sqlite'
-  db.execute "INSERT INTO Users (Name, Phone, Datestamp, Barber, Color)
-  VALUES ('#{@user_name}', '#{@phone}', '#{@datetime}', '#{@barber}', '#{@color}')"
+  db = get_db
+  db.execute 'INSERT INTO
+    Users
+    (
+       Name,
+       Phone,
+       Datestamp,
+       Barber,
+       Color
+    )
+    VALUES
+    (?, ?, ?, ?, ?)', [@user_name, @phone, @datetime, @barber, @color]
   db.close
   erb 'Спасибо что пользуетесь нашими услугами!'
 end

@@ -19,3 +19,8 @@ Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-11T15:00, Master
 Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-17T15:00, Master: none, Color: #51b749 
 Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-16T15:00, Master: Выберите Брадобрея, Color: #7bd148 
 Customer: admin, Phone: цацапкйцкйцк, Date: 2019-07-19T11:11, Master: Никодим, Color: #7bd148 
+Customer: admin, Phone: 890800000, Date: 2019-07-08T15:04, Master: Ефросий, Color: #5484ed 
+Customer: admin, Phone: 890800000, Date: 2019-07-08T15:04, Master: Ефросий, Color: #5484ed 
+Customer: admin, Phone: 890800000, Date: 2019-07-08T15:04, Master: Ефросий, Color: #5484ed 
+Customer: admin, Phone: 890800000, Date: 2019-07-08T15:04, Master: Ефросий, Color: #5484ed 
+Customer: admin, Phone: 890800000, Date: 121112-12-12T12:12, Master: Никодим, Color: #7bd148 
