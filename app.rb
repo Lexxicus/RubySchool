@@ -52,13 +52,16 @@ helpers do
   end
 end
 
-before '/visit/' do
-  unless session[:identity]
-    session[:previous_url] = request.path
-    @error = 'Sorry, you need to be logged in to visit ' + request.path
-    halt erb(:login_form)
+before do
+  #unless session[:identity]
+  #  session[:previous_url] = request.path
+  #  @error = 'Sorry, you need to be logged in to visit ' + request.path
+  #  halt erb(:login_form)
+
+  db = get_db
+  @barbers = db.execute 'select * from Barbers'
+
   end
-end
 
 get '/' do
   erb 'Hello! <a href="https://github.com/bootstrap-ruby/sinatra-bootstrap">Original</a> pattern has been modified for <a href="http://rubyschool.us/">Ruby School</a>'
@@ -88,9 +91,6 @@ get '/visit' do
   # @error = 'Sorry, you need to be logged in to visit ' + request.path
   # halt erb(:login_form)
   # end
-  db = get_db
-  @barbers = db.execute 'SELECT * FROM Barbers'
-  db.close
   erb :visit
 end
 
@@ -137,9 +137,6 @@ post '/visit' do
     subject: 'Новый клиент',
     body: "Username is #{@user_name}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
   )
-  of = File.open 'customers.txt', 'a'
-  of.write "Customer: #{@user_name}, Phone: #{@phone}, Date: #{@datetime}, Master: #{@barber}, Color: #{@color} \n"
-  of.close
   db = get_db
   db.execute 'INSERT INTO
     Users

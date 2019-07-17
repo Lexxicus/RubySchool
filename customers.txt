@@ -34,3 +34,4 @@ Customer: Иван, Phone: 890800000, Date: 15.07.2019 16:00, Master: Никод
     <option <%= @barber == 'Аганес' ? 'selected' : '' %>>Аганес</option>
 Customer: Иван, Phone: 890800000, Date: 30.07.2019 21:00, Master: Никодим, Color: #7bd148 
 Customer: admin, Phone: 890800000, Date: 24.07.2019 21:00, Master: Епифан, Color: #7bd148 
+Customer: admin, Phone: йцейцейейцейц, Date: 20.07.2019 12:26, Master: Никодим, Color: #7bd148 
