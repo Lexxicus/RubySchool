@@ -156,9 +156,6 @@ end
 post '/about' do
   @email = params[:email]
   @feedback = params[:feedback]
-  of = File.open 'feebacks.txt', 'a'
-  of.write "#{@email}, #{@feedback} \n"
-  of.close
   db = SQLite3::Database.new 'test.sqlite'
   db.execute "INSERT INTO Contacts (Email, Message)
   VALUES ('#{@email}', '#{@feedback}')"
