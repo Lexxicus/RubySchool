@@ -1,14 +1,25 @@
 <h2>Журнал записи на стрижку</h2>
 <p>Вот кто записался</p>
 
+<script type="text/javascript">
+    $(function () {
+        $('#color').simplecolorpicker();
+        $('#datetimepicker').datetimepicker({
+            format:'d.m.Y H:i',
+            lang:'ru'
+        });
+    });
+</script>
+
 <table class="table table-condensed" width="50%" border="1" cellpadding="4">
   <tr class="active">
     <th>Имя</th>
     <th>Телефон</th>
     <th>Брадобрей</th>
     <th>Дата</th>
+    <th>Цвет</th>
   </tr>
-
+  <tbody>
   <% @result.each do |row| %>
 
       <tr>
@@ -16,9 +27,10 @@
         <td><%= row['Phone'] %></td>
         <td><%= row['Barber'] %></td>
         <td><%= row['Datestamp'] %></td>
+        <td><%= row['Color'] %></td>
       </tr>
 
   <% end %>
-
+  </tbody>
 </table>
 

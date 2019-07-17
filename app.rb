@@ -6,6 +6,24 @@ require 'sinatra/reloader'
 require 'pony'
 require 'sqlite3'
 
+def get_db
+  db = SQLite3::Database.new 'barbershop.db'
+  db.results_as_hash = true
+  return db
+end
+#Проверка на наличие парикмахера
+def is_barber_exists? db,name
+  db.execute('select * from Barbers where Barbers=?', [name]).size > 0
+end
+#Наполнение таблицы при условии отсутствия такого парикмахера
+def seed_db db, barbers
+  barbers.each do |barber|
+    if !is_barber_exists? db,barber
+      db.execute 'insert into Barbers (Barbers) values (?)',[barber]
+    end
+  end
+end
+
 configure do
   enable :sessions
   db = SQLite3::Database.new 'barbershop.db'
@@ -19,18 +37,19 @@ configure do
       "Barber" VARCHAR,
       "Color" VARCHAR
     )'
+  db.execute 'CREATE TABLE IF NOT EXISTS
+    "Barbers"
+    (
+      "Id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "Barbers" VARCHAR
+    )'
+  seed_db db,['Никодим', 'Афанасий', 'Ярополк', 'Святозар', 'Епифан', 'Махмуд']
 end
 
 helpers do
   def username
     session[:identity] || 'Hello stranger'
   end
-end
-
-def get_db
-  db = SQLite3::Database.new 'barbershop.db'
-  db.results_as_hash = true
-  return db
 end
 
 before '/visit/' do
