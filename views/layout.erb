@@ -45,11 +45,13 @@
 								<%=username%>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/login_form">Login</a>
+								<a class="dropdown-item" href="/login_form">Авторизоваться</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="/logout">Logout</a>
+								<%if @error && @error.size > 0 then %>
+										<a class="dropdown-item" href="/logout">Выйти</a>
+								<% end %>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/showusers">Show Customers</a>
+                <a class="dropdown-item" href="/showusers">Список записавшихся</a>
 							</div>
 						</li>
 			    </ul>
@@ -57,7 +59,7 @@
 			</nav>
 
 			<div>
-				<%if @error then %>
+				<%if @error && @error.size > 0 then %>
 						<div class="alert alert-danger"><%=@error%></div>
 				<% end %>
 				<%= yield %>

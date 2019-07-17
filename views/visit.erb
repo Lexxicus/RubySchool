@@ -12,8 +12,9 @@
 </script>
 
 <form action="/visit" method="POST" role="form">
+
+  <label>Выберите Брадобрея:</label>
   <select size="1" class="form-control" value = "<% @barber %>" name="barber">
-    <option value="" selected>Выберите Брадобрея</option>
     <% @barbers.each do |item| %>
         <option <%= @barber == item['Barbers'] ? 'selected' : '' %>><%= item['Barbers'] %></option>
     <% end %>

@@ -150,7 +150,7 @@ post '/visit' do
     VALUES
     (?, ?, ?, ?, ?)', [@user_name, @phone, @datetime, @barber, @color]
   db.close
-  erb 'Спасибо что пользуетесь нашими услугами!'
+  erb "<h2> Спасибо что пользуетесь нашими услугами! </h2>"
 end
 
 post '/about' do
